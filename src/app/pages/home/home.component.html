@@ -1,0 +1,9 @@
+<p>home works!</p>
+<button (click)="addTask()">ADD</button>
+<div *ngFor="let task of tasks$ | async">
+    <span [innerText]="task.id">ID</span>
+    <span [innerText]="task.text">text</span>
+    <span [innerText]="task.completed">completed</span>
+
+
+</div>
