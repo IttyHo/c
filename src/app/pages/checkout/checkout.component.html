@@ -1,0 +1,48 @@
+<div class="checkout-wrapper">
+    <h1>צ'קאאוט</h1>
+  
+    <section class="checkout-section">
+      <h2>כתובת למשלוח</h2>
+      <div class="address-list">
+        <div *ngFor="let address of addresses" 
+             class="address-item" 
+             [class.selected]="address === selectedAddress"
+             (click)="selectAddress(address)">
+          <p>{{ address.name }}</p>
+          <p>{{ address.street }}, {{ address.city }}</p>
+        </div>
+      </div>
+      <button (click)="toggleAddressForm()">הוסף כתובת חדשה</button>
+  
+      <form *ngIf="showAddressForm" (ngSubmit)="addAddress()" class="address-form">
+        <input type="text" [(ngModel)]="newAddress.name" name="name" placeholder="שם" required />
+        <input type="text" [(ngModel)]="newAddress.street" name="street" placeholder="רחוב" required />
+        <input type="text" [(ngModel)]="newAddress.city" name="city" placeholder="עיר" required />
+        <button type="submit">שמור כתובת</button>
+      </form>
+    </section>
+  
+    <section class="checkout-section">
+      <h2>אמצעי תשלום</h2>
+      <select [(ngModel)]="selectedPaymentMethod">
+        <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+      </select>
+    </section>
+  
+    <section class="checkout-section cart">
+      <h2>סיכום ההזמנה</h2>
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="cart-item-details">
+          <h3>{{ item.name }}</h3>
+          <p>כמות: {{ item.quantity }}</p>
+        </div>
+        <p class="cart-item-price">{{ item.price * item.quantity }} ₪</p>
+      </div>
+      <div class="cart-total">
+        <h3>סה"כ לתשלום:</h3>
+        <p>{{ calculateTotal() }} ₪</p>
+      </div>
+    </section>
+  
+    <button class="complete-checkout" (click)="completeCheckout()">סיום תשלום</button>
+  </div>

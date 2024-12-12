@@ -4,12 +4,12 @@ export interface Task {
   completed?: boolean;
 }
 
-export class TodoState {
+export interface TodoState {
   tasks: Task[];
 
 }
 
-// export const initialState: TodoState = {
-//   tasks: []=[],
+export const initialState: TodoState = {
+  tasks:[]=[],
 
-// }; 
+}; 

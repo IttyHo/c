@@ -1,9 +1,19 @@
 <p>home works!</p>
+     <form [formGroup]="form">
+<input type="text" formControlName="taskValue" placeholder="Enter your task">
+<input type="text" formControlName="completed" placeholder="Enter if you completed">
+ </form>
 <button (click)="addTask()">ADD</button>
 <div *ngFor="let task of tasks$ | async">
-    <span [innerText]="task.id">ID</span>
-    <span [innerText]="task.text">text</span>
-    <span [innerText]="task.completed">completed</span>
+    <!-- <span [innerText]="task.id">ID</span> -->
+    <div class="border border-primary rounded p-3">
+        <span  [attr.contenteditable]="editable" [innerText]="task.text" (input)="updateTaskText($event)">text</span>
+    <span [innerText]="task.completed" *ngIf="task.completed">completed</span>
+    <button (click)="removeTask(task.id)" class="text-danger">    ❌ </button>
+    <button (click)="updateTask()" > 🖊 </button>
+    <button (click)="okUpdateTask(task.id)"  >✅</button>
+    
 
+</div>
 
 </div>

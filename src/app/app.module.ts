@@ -5,8 +5,10 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './pages/home/home.module';
-import { StoreLibModule } from 'store';
+import { ServicesModule, StoreLibModule } from 'store';
 import { TodoStoreModule } from '@store/store/todo/todo-store.module';
+import { CheckoutModule } from './pages/checkout/checkout.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,9 @@ import { TodoStoreModule } from '@store/store/todo/todo-store.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CheckoutModule,
+    ServicesModule,
+    HttpClientModule,
     HomeModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot( []),

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map, Observable, tap } from 'rxjs';
 import { selectAllTodos$, Task, taskActions, TodoState} from 'store';
@@ -10,31 +11,61 @@ import { selectAllTodos$, Task, taskActions, TodoState} from 'store';
 })
 export class HomeComponent implements OnInit {
 
- tasks$ : Observable< any>=this.store.select(selectAllTodos$).pipe(
-  // tap(ans=>alert(ans)),
-  // tap(ans=>alert(typeof(ans))),
-  // map(ans=>Object.entries(ans)),
-  // tap(ans=>alert(ans)),
+ tasks$ : Observable< any>=this.store.select(selectAllTodos$).pipe( );
 
-  // tap(ans=>alert(typeof(ans))),
-
- );
-  id: any;
+  id: number=0;
+  completed: boolean = true;
+  form: FormGroup;
+  editable: boolean=false;
+  newText: string ='';
 
   constructor(private store:Store) { }
 
 
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.initForm()
     this.store.dispatch(taskActions.loadTasks());
-
   }
 
 addTask(){
   this.id++
-  let task :Task={id:this.id,text:"my first task",completed:true}
+  this.completed=!this.completed
+  console.log(this.form);
+  
+  let task :Task={id:this.id,text:this.form.controls.taskValue.value}
+    
   this.store.dispatch(taskActions.addTask({task}))
+  this.initForm()
+}
+
+removeTask(id:number){
+  this.store.dispatch(taskActions.removeTask({id}))
+
+}
+updateTask(){
+this.editable=true;
+
 }
 
 
+
+updateTaskText(event:Event){
+  const target = event.target as HTMLElement;
+    this.newText = target.innerText;
+}
+
+okUpdateTask(id:number){
+  this.editable=false;
+  alert(this.newText)
+    this.store.dispatch(taskActions.updateTask({id , newText:this.newText}))
+
+}
+
+initForm(){
+this.form=new FormGroup({  
+  taskValue : new FormControl(''),
+  completed : new FormControl('')
+})
+}
 }

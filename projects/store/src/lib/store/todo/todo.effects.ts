@@ -8,7 +8,7 @@ import { taskActions} from './todo.actions';
 })
 export class TodoEffects {
   constructor(private actions$: Actions) {
-    alert('TodoEffects constructor called!!!');
+    // alert('TodoEffects constructor called!!!');
     
     // נוסיף subscription לדיבאג
     this.actions$.subscribe(action => {
@@ -17,22 +17,35 @@ export class TodoEffects {
   }
 
   loadTodos$ = createEffect(() => {
-    console.log('Setting up loadTodos$ effect');
+    // console.log('Setting up loadTodos$ effect');
     return this.actions$.pipe(
-      tap(action => console.log('Action in pipe:', action)),
+      // tap(action => console.log('Action in pipe:', action)),
       ofType(taskActions.loadTasks),
-      tap(() => alert('loadTodos action caught')),
+      // tap(() => alert('loadTodos action caught')),
       map(() => taskActions.loadTasksSuccess())
     );
   });
 
   addTask$ = createEffect(() => {
-    console.log('Setting up addTask$ effect');
+    // console.log('Setting up addTask$ effect');
     return this.actions$.pipe(
-      tap(action => console.log('Action in pipe:', action)),
+      // tap(action => console.log('Action in pipe:', action)),
       ofType(taskActions.addTask),
-      tap(() => alert('addTask action caught')),
+      // tap(() => alert('addTask action caught')),
         map(_ => taskActions.loadTasksSuccess())
       )})  
-  
+     
+removeTask$ = createEffect(() => {
+  // console.log('Setting up addTask$ effect');
+  return this.actions$.pipe(
+    // tap(action => console.log('Action in pipe:', action)),
+    ofType(taskActions.removeTask),
+    // tap(() => alert('addTask action caught')),
+      map(_ => taskActions.loadTasksSuccess())
+    )})  
+updateTask$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(taskActions.updateTask),
+      map(_ => taskActions.loadTasksSuccess())
+    )})  
 } 

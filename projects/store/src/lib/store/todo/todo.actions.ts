@@ -8,5 +8,6 @@ export const taskActions = {
   removeTask: createAction('[Todo] Remove Task', props<{ id: number }>()),
   loadTasks: createAction('[Todo] Load Tasks'),
   loadTasksSuccess: createAction('[Todo] Load Tasks success'),
-  loadTasksFailure: createAction('[Todo] Load Tasks failure', props<{ error: any }>())
+  loadTasksFailure: createAction('[Todo] Load Tasks failure', props<{ error: any }>()),
+  updateTask:createAction( '[Todo] Update Task',props<{ id: number, newText : string }>())
 }
