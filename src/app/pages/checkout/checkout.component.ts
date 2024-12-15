@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
 import { Address, AddressService , PaymentService } from 'store';
 
@@ -10,11 +11,14 @@ import { Address, AddressService , PaymentService } from 'store';
 export class CheckoutComponent implements OnInit{
 
   creditCards: any;
-  isSelectedAddress: boolean = false;;
+  isSelectedAddress: boolean = false;
+  addressForm: FormGroup;
+;
 
 
   constructor(private addressService:AddressService,
-    private paymentService:PaymentService
+    private paymentService:PaymentService,
+    private fb:FormBuilder
   ){
 
   }
@@ -25,16 +29,7 @@ export class CheckoutComponent implements OnInit{
   ];
   selectedAddress = this.addresses[0];
   showAddressForm = false;
-  newAddress:Address = {
-    id:'',
-    addressLine1: '',
-    addressLine2: '',
-    city: '',
-    country: '',
-    state: '',
-    zipCode: '',
-    saved:false
-  };
+  newAddress:Address ;
  ;
   paymentMethods = ['Credit Card', 'PayPal', 'Bank Transfer'];
   selectedPaymentMethod = this.paymentMethods[0];
@@ -66,13 +61,28 @@ export class CheckoutComponent implements OnInit{
       console.log({payment});
 
     })
+
+    this.initForm();
   }
 
+
+initForm(){
+  this.addressForm = this.fb.group({
+    id:[''],
+    addressLine1: ['', Validators.required],
+    addressLine2: [''],
+    city: ['', Validators.required],
+    country: ['', Validators.required],
+    state: [''],
+    zipCode: ['', [Validators.required, Validators.pattern('^[0-9]{5,7}$')]],
+    saved:[true]
+  });
+}
+
   addAddress() {
-    this.addressService.addAddress(this.newAddress).subscribe(add=>{
+    this.addressService.addAddress(this.addressForm.value).subscribe(add=>{
       console.log(add);
-      
-      this.addresses.push({ ...this.newAddress })
+      this.addresses.push({ ...this.addressForm.value })
     }
     )
     console.log(this.addresses);
