@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressService , PaymentService } from 'store';
+import { map } from 'rxjs';
+import { Address, AddressService , PaymentService } from 'store';
 
 @Component({
   selector: 'app-checkout',
@@ -7,7 +8,9 @@ import { AddressService , PaymentService } from 'store';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit{
+
   creditCards: any;
+  isSelectedAddress: boolean = false;;
 
 
   constructor(private addressService:AddressService,
@@ -16,14 +19,23 @@ export class CheckoutComponent implements OnInit{
 
   }
 
-  addresses = [
-    { name: 'Home', street: '123 Main St', city: 'Tel Aviv' },
-    { name: 'Office', street: '456 Office Rd', city: 'Haifa' }
+  addresses: Address[] = [
+    // { name: 'Home', street: '123 Main St', city: 'Tel Aviv' },
+    // { name: 'Office', street: '456 Office Rd', city: 'Haifa' }
   ];
   selectedAddress = this.addresses[0];
   showAddressForm = false;
-  newAddress = { name: '', street: '', city: '' };
-
+  newAddress:Address = {
+    id:'',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    country: '',
+    state: '',
+    zipCode: '',
+    saved:false
+  };
+ ;
   paymentMethods = ['Credit Card', 'PayPal', 'Bank Transfer'];
   selectedPaymentMethod = this.paymentMethods[0];
 
@@ -38,7 +50,7 @@ export class CheckoutComponent implements OnInit{
 
 
   ngOnInit() {
-    this.addressService.getDataWithToken('C4D5C577E9914C4B9C9BF46DF9914A28').subscribe(address=>{
+    this.addressService.getAddress().subscribe(address=>{
       this.addresses=address
       console.log({address});
       
@@ -57,17 +69,33 @@ export class CheckoutComponent implements OnInit{
   }
 
   addAddress() {
-    this.addresses.push({ ...this.newAddress });
-    this.newAddress = { name: '', street: '', city: '' };
+    this.addressService.addAddress(this.newAddress).subscribe(add=>{
+      console.log(add);
+      
+      this.addresses.push({ ...this.newAddress })
+    }
+    )
+    console.log(this.addresses);
+    
+    // this.newAddress = {};
     this.showAddressForm = false;
   }
 
-  selectAddress(address: any) {
+  selectAddress(address: Address) {
     this.selectedAddress = address;
+    this.isSelectedAddress=true;
   }
 
   calculateTotal() {
     return this.cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+  }
+
+  updateAddressToCheckout() {
+
+    this.addressService.updateAddressToCheckout(this.selectedAddress.id ).pipe(
+       map(_ => this.selectedAddress=null)
+    ).subscribe( );
+
   }
 
   completeCheckout() {

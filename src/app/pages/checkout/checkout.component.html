@@ -13,11 +13,16 @@
         </div>
       </div>
       <button (click)="toggleAddressForm()">הוסף כתובת חדשה</button>
-  
+      <button *ngIf="selectedAddress" (click)="updateAddressToCheckout()">בחירת כתובת זו למשלוח</button>
+
       <form *ngIf="showAddressForm" (ngSubmit)="addAddress()" class="address-form">
-        <input type="text" [(ngModel)]="newAddress.name" name="name" placeholder="שם" required />
-        <input type="text" [(ngModel)]="newAddress.street" name="street" placeholder="רחוב" required />
+        <!-- //להחליף לפורם -->
+        <input type="text" [(ngModel)]="newAddress.addressLine1" name="addressLine1" placeholder="כתובת 1" required />
+        <input type="text" [(ngModel)]="newAddress.addressLine2" name="addressLine2" placeholder="כתובת 2" required />
         <input type="text" [(ngModel)]="newAddress.city" name="city" placeholder="עיר" required />
+        <input type="text" [(ngModel)]="newAddress.country" name="country" placeholder="ארץ" required />
+        <input type="text" [(ngModel)]="newAddress.state" name="state" placeholder="מדינה" required />
+        <input type="text" [(ngModel)]="newAddress.zipCode" name="zipCode" placeholder="מיקוד" required />
         <button type="submit">שמור כתובת</button>
       </form>
     </section>
