@@ -11,7 +11,6 @@ import { HttpRequestModel } from '../types/http-request.model';
 })
 export class AddressService extends HttpServiceBase {
 
-  headers: String = '';
 
   private get _serverUrl(): string {
     return `${this.configService.ips.swaggerPath}/api/Address`;
@@ -30,13 +29,6 @@ export class AddressService extends HttpServiceBase {
       headers:this.configService.headers
     }));
   }
-
-  // addAddress(address:Address): Observable<boolean> {
-  //   return this.http.post<boolean>(this.configService.ips.swaggerPath + '/api/Address', address,{
-  //     headers: this.configService.headers,
-  //   });
-  // }
-
 
   updateAddressToCheckout(addressId:string): Observable<boolean> {
     return this.put$ (new HttpRequestModel({

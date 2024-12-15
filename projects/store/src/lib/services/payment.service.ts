@@ -1,38 +1,37 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ConfigurationService } from './configuration.service';
+import { HttpServiceBase } from './http-service.base';
+import { HttpRequestModel } from '../types/http-request.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentService {
-
- 
-  constructor(private http:HttpClient) { }
-  
-  apiUrl='https://du-mock-checkout-7d42d0a76fbf.herokuapp.com';
-  //https://du-mock-checkout-7d42d0a76fbf.herokuapp.com/#addresses
-  getPaymentOptions(token: string): Observable<any> {
+export class PaymentService extends HttpServiceBase {
 
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    // https://du-mock-checkout-7d42d0a76fbf.herokuapp.com/api/Payment/options
+  private get _serverUrl(): string {
+    return `${this.configService.ips.swaggerPath}/api/Payment`;
+  }
 
-    return this.http.get<any>(this.apiUrl+'/api/Payment/Options', { headers });
+  constructor(public http: HttpClient,
+    public configService: ConfigurationService) {
+    super(http, configService);
+  }
+
+  getPaymentOptions(): Observable<string []> {
+    return this.get$ (new HttpRequestModel({
+      url: this._serverUrl+'/Options',
+      headers:this.configService.headers
+    }));
   }        
   
   
-  
-  getPaymentCreditCardOptions(token: string): Observable<any> {
-
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    // https://du-mock-checkout-7d42d0a76fbf.herokuapp.com/api/Payment/options
-
-    return this.http.get<any>(this.apiUrl+'/api/Payment/creditcards', { headers });
+  getPaymentCreditCardOptions(): Observable<string []> {
+    return this.get$ (new HttpRequestModel({
+      url: this._serverUrl+'/Creditcards',
+      headers:this.configService.headers
+    }));
   }   
 }

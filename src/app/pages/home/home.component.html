@@ -5,7 +5,6 @@
  </form>
 <button (click)="addTask()">ADD</button>
 <div *ngFor="let task of tasks$ | async">
-    <!-- <span [innerText]="task.id">ID</span> -->
     <div class="border border-primary rounded p-3">
         <span  [attr.contenteditable]="editable" [innerText]="task.text" (input)="updateTaskText($event)">text</span>
     <span [innerText]="task.completed" *ngIf="task.completed">completed</span>

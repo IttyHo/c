@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  configPath: 'assets/config/'
+  configPath: 'assets/config/',
+  shufersalLogo:'assets/pictures/shufersal.PNG'
 
 };
 

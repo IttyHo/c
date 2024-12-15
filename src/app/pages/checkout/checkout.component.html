@@ -1,6 +1,5 @@
 <div class="checkout-wrapper">
-    <h1>צ'קאאוט</h1>
-  
+    <img class="logo" [src]="shufersalLogo">  
     <section class="checkout-section">
       <h2>כתובת למשלוח</h2>
       <div class="address-list">
@@ -8,26 +7,14 @@
              class="address-item" 
              [class.selected]="address === selectedAddress"
              (click)="selectAddress(address)">
-          <p>{{ address.name }}</p>
-          <p>{{ address.street }}, {{ address.city }}</p>
+          <p>{{ address.addressLine1 }}, {{ address.city }}</p>
         </div>
       </div>
       <button (click)="toggleAddressForm()">הוסף כתובת חדשה</button>
       <button *ngIf="selectedAddress" (click)="updateAddressToCheckout()">בחירת כתובת זו למשלוח</button>
 
-      <!-- <form *ngIf="showAddressForm" (ngSubmit)="addAddress()" class="address-form">
-         //להחליף לפורם 
-        <input type="text" [(ngModel)]="newAddress.addressLine1" name="addressLine1" placeholder="כתובת 1" required />
-        <input type="text" [(ngModel)]="newAddress.addressLine2" name="addressLine2" placeholder="כתובת 2" required />
-        <input type="text" [(ngModel)]="newAddress.city" name="city" placeholder="עיר" required />
-        <input type="text" [(ngModel)]="newAddress.country" name="country" placeholder="ארץ" required />
-        <input type="text" [(ngModel)]="newAddress.state" name="state" placeholder="מדינה" required />
-        <input type="text" [(ngModel)]="newAddress.zipCode" name="zipCode" placeholder="מיקוד" required />
-        <button type="submit">שמור כתובת</button>
-      </form> -->
 
-      <form [formGroup]="addressForm" (ngSubmit)="addAddress()" class="address-form">
-        <!-- כתובת 1 -->
+      <form [formGroup]="addressForm" *ngIf="showAddressForm" (ngSubmit)="addAddress()" class="address-form">
         <div>
           <label for="addressLine1">כתובת 1:</label>
           <input 
@@ -43,7 +30,6 @@
           </span>
         </div>
       
-        <!-- כתובת 2 -->
         <div>
           <label for="addressLine2">כתובת 2:</label>
           <input 
@@ -54,7 +40,6 @@
           <small id="addressLine2-help" class="help-text">שדה אופציונלי</small>
         </div>
       
-        <!-- עיר -->
         <div>
           <label for="city">עיר:</label>
           <input 
@@ -70,7 +55,6 @@
           </span>
         </div>
       
-        <!-- מדינה -->
         <div>
           <label for="country">ארץ:</label>
           <input 
@@ -86,7 +70,6 @@
           </span>
         </div>
       
-        <!-- מחוז -->
         <div>
           <label for="state">מדינה:</label>
           <input 
@@ -95,7 +78,6 @@
             placeholder="מדינה" />
         </div>
       
-        <!-- מיקוד -->
         <div>
           <label for="zipCode">מיקוד:</label>
           <input 
@@ -111,7 +93,6 @@
           </span>
         </div>
       
-        <!-- כפתור שליחה -->
         <button 
           type="submit" 
           [disabled]="addressForm.invalid" 

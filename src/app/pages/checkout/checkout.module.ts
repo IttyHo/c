@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckoutComponent } from './checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/material';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 
 
 @NgModule({
@@ -15,8 +14,6 @@ import { MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatFormFieldModule,
-    MatInputModule
   ],
   exports:[CheckoutComponent]
 })
