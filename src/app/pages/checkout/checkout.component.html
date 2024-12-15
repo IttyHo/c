@@ -1,129 +1,125 @@
-<div class="checkout-wrapper">
-    <img class="logo" [src]="shufersalLogo">  
-    <section class="checkout-section">
-      <h2>כתובת למשלוח</h2>
-      <div class="address-list">
-        <div *ngFor="let address of addresses" 
-             class="address-item" 
-             [class.selected]="address === selectedAddress"
-             (click)="selectAddress(address)">
-          <p>{{ address.addressLine1 }}, {{ address.city }}</p>
-        </div>
-      </div>
-      <button (click)="toggleAddressForm()">הוסף כתובת חדשה</button>
-      <button *ngIf="selectedAddress" (click)="updateAddressToCheckout()">בחירת כתובת זו למשלוח</button>
-
-
-      <form [formGroup]="addressForm" *ngIf="showAddressForm" (ngSubmit)="addAddress()" class="address-form">
-        <div>
-          <label for="addressLine1">כתובת 1:</label>
-          <input 
-            id="addressLine1" 
-            formControlName="addressLine1" 
-            placeholder="כתובת 1" 
-            aria-required="true" 
-            required />
-          <span *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched" 
-                aria-live="polite" 
-                class="error">
-            שדה זה נדרש.
-          </span>
-        </div>
-      
-        <div>
-          <label for="addressLine2">כתובת 2:</label>
-          <input 
-            id="addressLine2" 
-            formControlName="addressLine2" 
-            placeholder="כתובת 2" 
-            aria-describedby="addressLine2-help" />
-          <small id="addressLine2-help" class="help-text">שדה אופציונלי</small>
-        </div>
-      
-        <div>
-          <label for="city">עיר:</label>
-          <input 
-            id="city" 
-            formControlName="city" 
-            placeholder="עיר" 
-            aria-required="true" 
-            required />
-          <span *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched" 
-                aria-live="polite" 
-                class="error">
-            שדה זה נדרש.
-          </span>
-        </div>
-      
-        <div>
-          <label for="country">ארץ:</label>
-          <input 
-            id="country" 
-            formControlName="country" 
-            placeholder="ארץ" 
-            aria-required="true" 
-            required />
-          <span *ngIf="addressForm.get('country')?.invalid && addressForm.get('country')?.touched" 
-                aria-live="polite" 
-                class="error">
-            שדה זה נדרש.
-          </span>
-        </div>
-      
-        <div>
-          <label for="state">מדינה:</label>
-          <input 
-            id="state" 
-            formControlName="state" 
-            placeholder="מדינה" />
-        </div>
-      
-        <div>
-          <label for="zipCode">מיקוד:</label>
-          <input 
-            id="zipCode" 
-            formControlName="zipCode" 
-            placeholder="מיקוד" 
-            aria-required="true" 
-            required />
-          <span *ngIf="addressForm.get('zipCode')?.invalid && addressForm.get('zipCode')?.touched" 
-                aria-live="polite" 
-                class="error">
-            יש להזין מיקוד תקין.
-          </span>
-        </div>
-      
-        <button 
-          type="submit" 
-          [disabled]="addressForm.invalid" 
-          [attr.aria-disabled]="addressForm.invalid ? 'true' : 'false'">
-          שמור כתובת
-        </button>
-      </form>
-
-    </section>
-  
-    <section class="checkout-section">
-      <h2>אמצעי תשלום</h2>
-      <select [(ngModel)]="selectedPaymentMethod">
-        <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
-      </select>
-    </section>
-  
-    <section class="checkout-section cart">
-      <h2>סיכום ההזמנה</h2>
-      <div class="cart-item" *ngFor="let item of cartItems">
-        <div class="cart-item-details">
-          <h3>{{ item.name }}</h3>
-          <p>כמות: {{ item.quantity }}</p>
-        </div>
-        <p class="cart-item-price">{{ item.price * item.quantity }} ₪</p>
-      </div>
-      <div class="cart-total">
-        <h3>סה"כ לתשלום:</h3>
-        <p>{{ calculateTotal() }} ₪</p>
-      </div>
-    </section>
-  
-    <button class="complete-checkout" (click)="completeCheckout()">סיום תשלום</button>
+<div>
+  <button (click)="changeLanguage('en')">{{ 'english' | translate }}</button>
+  <button (click)="changeLanguage('he')">{{ 'hebrew' | translate }}</button>
+</div>
+<img class="logo" [src]="shufersalLogo">  
+<section class="checkout-section">
+  <h2>{{ 'shipping_address' | translate }}</h2>
+  <div class="address-list">
+    <div *ngFor="let address of addresses" 
+         class="address-item" 
+         [class.selected]="address === selectedAddress"
+         (click)="selectAddress(address)">
+      <p>{{ address.addressLine1 }}, {{ address.city }}</p>
+    </div>
   </div>
+  <button (click)="toggleAddressForm()" [innerText]="'add_new_address' | translate"></button>
+  <button *ngIf="selectedAddress" (click)="updateAddressToCheckout()" [innerText]="'select_this_address' | translate"></button>
+
+  <form [formGroup]="addressForm" *ngIf="showAddressForm" (ngSubmit)="addAddress()" class="address-form">
+    <div>
+      <label for="addressLine1">{{ 'address_line_1' | translate }}:</label>
+      <input 
+        id="addressLine1" 
+        formControlName="addressLine1" 
+        aria-required="true" 
+        required />
+      <span *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched" 
+            aria-live="polite" 
+            class="error">
+        {{ 'address_required' | translate }}
+      </span>
+    </div>
+  
+    <div>
+      <label for="addressLine2">{{ 'address_line_2' | translate }}:</label>
+      <input 
+        id="addressLine2" 
+        formControlName="addressLine2" 
+        aria-describedby="addressLine2-help" />
+      <small id="addressLine2-help" class="help-text">{{ 'optional_field' | translate }}</small>
+    </div>
+  
+    <div>
+      <label for="city">{{ 'city' | translate }}:</label>
+      <input 
+        id="city" 
+        formControlName="city" 
+        aria-required="true" 
+        required />
+      <span *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched" 
+            aria-live="polite" 
+            class="error">
+        {{ 'address_required' | translate }}
+      </span>
+    </div>
+  
+    <div>
+      <label for="country">{{ 'country' | translate }}:</label>
+      <input 
+        id="country" 
+        formControlName="country" 
+        aria-required="true" 
+        required />
+      <span *ngIf="addressForm.get('country')?.invalid && addressForm.get('country')?.touched" 
+            aria-live="polite" 
+            class="error">
+        {{ 'address_required' | translate }}
+      </span>
+    </div>
+  
+    <div>
+      <label for="state">{{ 'state' | translate }}:</label>
+      <input 
+        id="state" 
+        formControlName="state" 
+        />
+    </div>
+  
+    <div>
+      <label for="zipCode">{{ 'zip_code' | translate }}:</label>
+      <input 
+        id="zipCode" 
+        formControlName="zipCode" 
+        aria-required="true" 
+        required />
+      <span *ngIf="addressForm.get('zipCode')?.invalid && addressForm.get('zipCode')?.touched" 
+            aria-live="polite" 
+            class="error">
+        {{ 'valid_zip_required' | translate }}
+      </span>
+    </div>
+  
+    <button 
+      type="submit" 
+      [disabled]="addressForm.invalid" 
+      [attr.aria-disabled]="addressForm.invalid ? 'true' : 'false'">
+      {{ 'save_address' | translate }}
+    </button>
+  </form>
+
+</section>
+
+<section class="checkout-section">
+  <h2>{{ 'payment_method' | translate }}</h2>
+  <select [(ngModel)]="selectedPaymentMethod">
+    <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+  </select>
+</section>
+
+<section class="checkout-section cart">
+  <h2>{{ 'order_summary' | translate }}</h2>
+  <div class="cart-item" *ngFor="let item of cartItems">
+    <div class="cart-item-details">
+      <h3>{{ item.name }}</h3>
+      <p>{{ 'quantity' | translate }}: {{ item.quantity }}</p>
+    </div>
+    <p class="cart-item-price">{{ item.price * item.quantity }} ₪</p>
+  </div>
+  <div class="cart-total">
+    <h3>{{ 'total_amount' | translate }}:</h3>
+    <p>{{ calculateTotal() }} ₪</p>
+  </div>
+</section>
+
+<button class="complete-checkout" (click)="completeCheckout()">{{ 'complete_checkout' | translate }}</button>

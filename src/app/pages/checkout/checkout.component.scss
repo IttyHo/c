@@ -1,104 +1,272 @@
 .checkout-wrapper {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  .checkout-section {
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  .address-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .address-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    flex: 1 1 calc(50% - 10px);
-    background: #fff;
-  }
-  
-  .address-item.selected {
-    border-color: #4CAF50;
-    background: #e8f5e9;
-  }
-  
-  .address-item:hover {
-    border-color: #888;
-  }
-  
-  .address-form input {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    margin: 5px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: 0.3s;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  h2{
-    text-align: center;
-  }
-  .cart {
-    background: #fff;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.checkout-section {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.checkout-section .cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.checkout-section .cart-item-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkout-section .cart-item-details p {
+  font-size: 14px;
+  color: #666;
+}
+
+.checkout-section .cart-item-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.checkout-section .cart-total {
+  padding-top: 15px;
+  border-top: 2px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkout-section .cart-total h3 {
+  color: #4CAF50;
+}
+
+.address-item.selected {
+  background-color: #e8f5e9;
+  border: 2px solid #4CAF50;
+}
+
+.checkout-section select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.checkout-section select:focus {
+  border-color: #4CAF50;
+  outline: none;
+  background-color: #fff;
+}
+
+.checkout-section button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkout-section button:hover {
+  background-color: #45a049;
+}
+
+.checkout-section button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.address-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.address-form input {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.address-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.address-form .error {
+  color: red;
+  font-size: 12px;
+}
+
+.address-form button {
+  padding: 12px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.address-form button:hover {
+  background-color: #45a049;
+}
+
+.address-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.address-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  flex: 1 1 calc(50% - 10px);
+  background: #fff;
+}
+
+.address-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button {
+  margin: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.cart {
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .checkout-wrapper {
     padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
   }
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #ddd;
+
+  .checkout-section .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
     padding: 10px 0;
   }
-  
-  .cart-item:last-child {
-    border-bottom: none;
+
+  .checkout-section .cart-total {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .cart-total {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
+
+  .checkout-section h2 {
+    font-size: 20px;
   }
-  
+
+  .address-list {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .address-item {
+    flex: 1 1 100%;
+    margin-bottom: 10px;
+  }
+
+  .address-form input {
+    width: 100%;
+  }
+
+  .checkout-section select,
+  .checkout-section button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .checkout-section h2 {
+    font-size: 18px;
+  }
+
+  .cart-item-details h3 {
+    font-size: 16px;
+  }
+
+  .cart-item-price {
+    font-size: 14px;
+  }
+}

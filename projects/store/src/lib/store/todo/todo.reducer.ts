@@ -20,7 +20,7 @@ initialState,
   })),
   on(taskActions.addTask, (state, { task }) => ({
     ...state,
-    tasks: [...state.tasks, task] // דחיפת הנתון החדש למערך
+    tasks: [...state.tasks, task] 
 
    })),
   on(taskActions.removeTask, (state, { id }) => ({
@@ -31,14 +31,14 @@ initialState,
     const taskExists = state.tasks.some(task => task.id === id);
     if (!taskExists) {
       alert("not exists")
-      return state; // No changes if the task doesn't exist
+      return state; 
     }
     return {
       ...state,
       tasks: state.tasks.map(task =>
         task.id === id
-          ? { ...task, text: newText } // Update the task
-          : task // Keep other tasks unchanged
+          ? { ...task, text: newText } 
+          : task 
       )
     };
   })

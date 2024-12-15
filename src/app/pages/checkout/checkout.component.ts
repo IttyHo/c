@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Address, AddressService, PaymentService } from 'store';
+import { Address, AddressService, PaymentService , LanguageService } from 'store';
 
 @Component({
   selector: 'app-checkout',
@@ -16,26 +16,26 @@ export class CheckoutComponent implements OnInit {
   isSelectedAddress: boolean = false;
   addressForm: FormGroup;
   shufersalLogo: string;
+  currentLang: string;
   ;
 
 
   constructor(private addressService: AddressService,
     private paymentService: PaymentService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private languageService: LanguageService
   ) {
+    this.currentLang = this.languageService.currentLang || 'en'; 
 
   }
 
-  addresses: Address[] = [
-    // { name: 'Home', street: '123 Main St', city: 'Tel Aviv' },
-    // { name: 'Office', street: '456 Office Rd', city: 'Haifa' }
-  ];
+  addresses: Address[] = [];
   selectedAddress = this.addresses[0];
   showAddressForm = false;
   newAddress: Address;
   ;
-  paymentMethods = ['Credit Card', 'PayPal', 'Bank Transfer'];
+  paymentMethods = [];
   selectedPaymentMethod = this.paymentMethods[0];
 
   cartItems = [
@@ -48,6 +48,9 @@ export class CheckoutComponent implements OnInit {
     this.initForm();
   }
 
+  changeLanguage(language: string) {
+    this.languageService.setLanguage(language);
+  }
 
   ngOnInit() {
     this.addressService.getAddress().subscribe(address => {

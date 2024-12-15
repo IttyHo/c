@@ -8,11 +8,3 @@ export const selectAllTodos$ : MemoizedSelector<object, Task[]> =
 createSelector(
    taskFeatureSelector,
      ({tasks}) => tasks );
-
-
-
-
-// export const selectTodoLoading = createSelector(
-//   selectTodoState,
-//   (state: TodoState) => state
-// ); 

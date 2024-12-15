@@ -1,0 +1,24 @@
+{
+    "english": "אנגלית",
+    "hebrew": "עברית",
+    "shipping_address": "כתובת למשלוח",
+    "add_new_address": "הוסף כתובת חדשה",
+    "select_this_address": "בחירת כתובת זו",
+    "address_line_1": "כתובת 1",
+    "address_line_1_placeholder": "כתובת 1",
+    "address_required": "שדה זה נדרש",
+    "city": "עיר",
+    "city_placeholder": "עיר",
+    "country": "ארץ",
+    "country_placeholder": "ארץ",
+    "zip_code": "מיקוד",
+    "zip_code_placeholder": "מיקוד",
+    "valid_zip_required": "יש להזין מיקוד תקין",
+    "save_address": "שמור כתובת",
+    "payment_method": "אמצעי תשלום",
+    "order_summary": "סיכום הזמנה",
+    "quantity": "כמות",
+    "total_amount": "סה\"כ לתשלום",
+    "complete_checkout": "סיום תשלום"
+  }
+  

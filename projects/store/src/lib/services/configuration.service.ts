@@ -23,7 +23,6 @@ getTokenAndHeaders(){
       this.http.get<IpConfig>(`${path}/ipConfig.json`),
     ).pipe(
       tap(res=>console.log),
-      // map(response=>this.ips]),
       tap(response => [this.ips] = response),
       tap(_=>    this.getTokenAndHeaders() )
     ).toPromise();

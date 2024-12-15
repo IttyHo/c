@@ -1,0 +1,24 @@
+{
+    "english": "English",
+    "hebrew": "Hebrew",
+    "shipping_address": "Shipping Address",
+    "add_new_address": "Add New Address",
+    "select_this_address": "Select this Address",
+    "address_line_1": "Address Line 1",
+    "address_line_1_placeholder": "Address Line 1",
+    "address_required": "This field is required",
+    "city": "City",
+    "city_placeholder": "City",
+    "country": "Country",
+    "country_placeholder": "Country",
+    "zip_code": "Zip Code",
+    "zip_code_placeholder": "Zip Code",
+    "valid_zip_required": "Valid zip code is required",
+    "save_address": "Save Address",
+    "payment_method": "Payment Method",
+    "order_summary": "Order Summary",
+    "quantity": "Quantity",
+    "total_amount": "Total Amount",
+    "complete_checkout": "Complete Checkout"
+  }
+  

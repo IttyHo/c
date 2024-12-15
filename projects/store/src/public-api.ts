@@ -17,6 +17,7 @@ export * from './lib/services/address.service';
 export * from './lib/services/services.module';
 export * from './lib/services/payment.service';
 export * from './lib/services/configuration.service';
+export * from './lib/services/language.service';
 
 
 //************types*********************/
